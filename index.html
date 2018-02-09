@@ -11,7 +11,6 @@
 			position: absolute;
 			z-index: 100;
 		}
-
 		#pet {
 			width:30px;
 			height: 30px;
@@ -20,10 +19,9 @@
 			position: absolute;
 			z-index: 1000;
 		}
-
-		.yum::after {
+		.speak::after {
 			position: absolute;
-			content: "yum!";
+			content: attr(data-txt);
 			left:35px;
 			opacity: 100;
 			font-family: Arial,Helvetica,'sans-serif';
@@ -32,12 +30,11 @@
 			padding:3px;
 			font-size:11px;
 		}
-
 	</style>
 </head>
 <body onresize="resizeField()" style="margin: 0px;">
 
-	<div id="pet" style="left: 20px;top: 20px;"></div>
+	<div data-txt="hey!" id="pet" style="left: 20px;top: 20px;"></div>
 
 	<div id="window" style="background-color:#85c2ba;margin:10px;">
 
@@ -48,27 +45,27 @@
 
 
 	<script type="text/javascript">
-
 		document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
 		document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
 
-		function speak(wordClass) {
-			document.querySelector('#pet').classList.add(wordClass);
-			function removeWord() {document.querySelector('#pet').classList.remove(wordClass);}
+		// talk function
+		function speak(sayWhat) {
+			document.getElementById("pet").dataset.txt = sayWhat;
+			document.querySelector('#pet').classList.add("speak");
+			function removeWord() {document.querySelector('#pet').classList.remove("speak");}
 			setTimeout(removeWord, 1000);
 		}
 
+		// resize the field
 		function resizeField() {
 			document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
 			document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
 		}
-
 		function generateCoordinates(ev) {
 			var x = event.clientX;
     		var y = event.clientY;
     		dropFood(x, y)
 		}
-
 		function dropFood(xCor, yCor) {
 			var newFood = document.createElement("div");
 			newFood.setAttribute("class","food");
@@ -76,24 +73,18 @@
 			newFood.style.top = yCor + "px";
 			var currentDiv = document.getElementById("anchor");
   			document.getElementById("window").insertBefore(newFood, currentDiv);
-
 		}
-
 		function thinkAboutEating() {
 			var foodPositionLeft = parseInt((document.querySelector(".food").style.left).replace("px",""),10);
 			var foodPositionTop = parseInt((document.querySelector(".food").style.top).replace("px",""),10);
 			var petPositionLeft = parseInt((document.querySelector("#pet").style.left).replace("px",""),10);
 			var petPositionTop = parseInt((document.querySelector("#pet").style.top).replace("px",""),10);
-
 			var distanceToFoodLeft = foodPositionLeft - petPositionLeft;
 			var distanceToFoodTop = foodPositionTop - petPositionTop;
-
 			if ((distanceToFoodLeft <= 30 && distanceToFoodLeft > -6) && (distanceToFoodTop <= 30 && distanceToFoodTop > -6))  {
-
 				console.log("YUM");
 				document.querySelector(".food").remove();
-
-				speak("yum");
+				speak("yum!");
 			    
 			}
 			else {
@@ -114,13 +105,10 @@
 					document.querySelector("#pet").style.top = petPositionTop + "px";
 				}
 			}
-
 		}
 
+		// Thinking ten times a second
 		document.getElementById("window").onclick = generateCoordinates;
-
-
-
 		window.setInterval(function(){
 			if (document.querySelector(".food")) {
 				thinkAboutEating();
@@ -128,10 +116,6 @@
 		  
 		}, 100);
 		
-
-
-
-
 	</script>
 
 </body>
