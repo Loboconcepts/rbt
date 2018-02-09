@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<style type="text/css">
 		.food {
@@ -73,8 +74,8 @@
 			newFood.setAttribute("class","food");
 			newFood.style.left = xCor + "px";
 			newFood.style.top = yCor + "px";
-			var currentDiv = document.getElementById("anchor"); 
-  			document.getElementById("window").insertBefore(newFood, currentDiv); 
+			var currentDiv = document.getElementById("anchor");
+  			document.getElementById("window").insertBefore(newFood, currentDiv);
 
 		}
 
@@ -93,12 +94,6 @@
 				document.querySelector(".food").remove();
 
 				speak("yum");
-
-
-				
-				
-			    
-
 			    
 			}
 			else {
