@@ -45,6 +45,7 @@
 
 
 	<script type="text/javascript">
+		var bored = 0;
 		document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
 		document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
 
@@ -64,8 +65,20 @@
 		function generateCoordinates(ev) {
 			var x = event.clientX;
     		var y = event.clientY;
-    		dropFood(x, y)
+    		dropFood(x, y);
+    		thinkNow = window.setInterval(ifFoodExists, 24);
 		}
+
+		function ifFoodExists() {
+			if (document.querySelector(".food")) {
+				thinkAboutEating();
+				bored = 0;
+			}
+			else {
+				return
+			}
+		}
+
 		function dropFood(xCor, yCor) {
 			var newFood = document.createElement("div");
 			newFood.setAttribute("class","food");
@@ -84,7 +97,9 @@
 			if ((distanceToFoodLeft <= 30 && distanceToFoodLeft > -6) && (distanceToFoodTop <= 30 && distanceToFoodTop > -6))  {
 				console.log("YUM");
 				document.querySelector(".food").remove();
+				window.performance.memory
 				speak("yum!");
+				clearInterval(thinkNow);
 			    
 			}
 			else {
@@ -107,14 +122,20 @@
 			}
 		}
 
+		function amBored() {
+			bored = bored + 1
+			if (bored == 3) {
+				speak("RAWR");
+				bored = 0;
+			}
+
+		}
+
 		// Thinking ten times a second
 		document.getElementById("window").onclick = generateCoordinates;
-		window.setInterval(function(){
-			if (document.querySelector(".food")) {
-				thinkAboutEating();
-			}
-		  
-		}, 100);
+		var thinkNow = window.setInterval(amBored, 5000);
+
+			// 42
 		
 	</script>
 
