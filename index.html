@@ -72,8 +72,8 @@
 
 		function ifFoodExists() {
 			if (document.querySelector(".food")) {
-				thinkAboutEating();
 				bored = 0;
+				thinkAboutEating();
 			}
 			else {
 				return
@@ -125,16 +125,16 @@
 
 		function amBored() {
 			bored = bored + 1
-			if (bored == 3) {
+			if (bored == 5) {
 				speak("RAWR");
-				bored = 0;
+				bored = 3;
 			}
 		}
 
 		function petted() {
 			speak("prrrrrrr");
 			happiness = happiness + 1;
-			bored = -2
+			bored = 0
 		}
 
 		document.getElementById("window").onclick = generateCoordinates;
