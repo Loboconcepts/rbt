@@ -73,7 +73,8 @@
 		function ifFoodExists() {
 			if (document.querySelector(".food")) {
 				bored = 0;
-				thinkAboutEating();
+				thinkAboutEating();	
+
 			}
 			else {
 				return
@@ -96,7 +97,6 @@
 			var distanceToFoodLeft = foodPositionLeft - petPositionLeft;
 			var distanceToFoodTop = foodPositionTop - petPositionTop;
 			if ((distanceToFoodLeft <= 30 && distanceToFoodLeft > -6) && (distanceToFoodTop <= 30 && distanceToFoodTop > -6))  {
-				console.log("YUM");
 				document.querySelector(".food").remove();
 				window.performance.memory
 				speak("yum!");
