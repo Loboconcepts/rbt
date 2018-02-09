@@ -53,7 +53,7 @@
 			document.getElementById("pet").dataset.txt = sayWhat;
 			document.querySelector('#pet').classList.add("speak");
 			function removeWord() {document.querySelector('#pet').classList.remove("speak");}
-			setTimeout(removeWord, 1000);
+			setTimeout(removeWord, ((sayWhat.length * 100) + 600));
 		}
 
 		// resize the field
