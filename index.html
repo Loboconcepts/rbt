@@ -46,6 +46,7 @@
 
 	<script type="text/javascript">
 		var bored = 0;
+		var happiness = 0;
 		document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
 		document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
 
@@ -128,11 +129,18 @@
 				speak("RAWR");
 				bored = 0;
 			}
-
 		}
 
-		// Thinking ten times a second
+		function petted() {
+			speak("prrrrrrr");
+			happiness = happiness + 1;
+			bored = -2
+		}
+
 		document.getElementById("window").onclick = generateCoordinates;
+		document.getElementById("pet").onclick = petted;
+
+				// Thinking twice a second
 		var thinkNow = window.setInterval(amBored, 5000);
 
 			// 42
