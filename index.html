@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.food {
+			width: 10px;
+			height: 10px;
+			background-color: #000000;
+			position: absolute;
+			z-index: 100;
+		}
+
+		#pet {
+			width:30px;
+			height: 30px;
+			border-radius:100%;
+			background-color: #FF00FF;
+			position: absolute;
+			z-index: 1000;
+		}
+
+		.yum::after {
+			position: absolute;
+			content: "yum!";
+			left:35px;
+			opacity: 100;
+			font-family: Arial,Helvetica,'sans-serif';
+			background-color: #ffffff;
+			border-radius:10px;
+			padding:3px;
+			font-size:11px;
+		}
+
+	</style>
+</head>
+<body onresize="resizeField()" style="margin: 0px;">
+
+	<div id="pet" style="left: 20px;top: 20px;"></div>
+
+	<div id="window" style="background-color:#85c2ba;margin:10px;">
+
+		<div id="anchor">
+		</div>
+	</div>
+
+
+
+	<script type="text/javascript">
+
+		document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
+		document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
+
+		function speak(wordClass) {
+			document.querySelector('#pet').classList.add(wordClass);
+			function removeWord() {document.querySelector('#pet').classList.remove(wordClass);}
+			setTimeout(removeWord, 1000);
+		}
+
+		function resizeField() {
+			document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
+			document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
+		}
+
+		function generateCoordinates(ev) {
+			var x = event.clientX;
+    		var y = event.clientY;
+    		dropFood(x, y)
+		}
+
+		function dropFood(xCor, yCor) {
+			var newFood = document.createElement("div");
+			newFood.setAttribute("class","food");
+			newFood.style.left = xCor + "px";
+			newFood.style.top = yCor + "px";
+			var currentDiv = document.getElementById("anchor"); 
+  			document.getElementById("window").insertBefore(newFood, currentDiv); 
+
+		}
+
+		function thinkAboutEating() {
+			var foodPositionLeft = parseInt((document.querySelector(".food").style.left).replace("px",""),10);
+			var foodPositionTop = parseInt((document.querySelector(".food").style.top).replace("px",""),10);
+			var petPositionLeft = parseInt((document.querySelector("#pet").style.left).replace("px",""),10);
+			var petPositionTop = parseInt((document.querySelector("#pet").style.top).replace("px",""),10);
+
+			var distanceToFoodLeft = foodPositionLeft - petPositionLeft;
+			var distanceToFoodTop = foodPositionTop - petPositionTop;
+
+			if ((distanceToFoodLeft <= 30 && distanceToFoodLeft > -6) && (distanceToFoodTop <= 30 && distanceToFoodTop > -6))  {
+
+				console.log("YUM");
+				document.querySelector(".food").remove();
+
+				speak("yum");
+
+
+				
+				
+			    
+
+			    
+			}
+			else {
+				if (petPositionLeft < foodPositionLeft) {
+					petPositionLeft = petPositionLeft + Math.floor(foodPositionLeft/petPositionLeft);
+					document.querySelector("#pet").style.left = petPositionLeft + "px";
+				}
+				if (petPositionTop < foodPositionTop) {
+					petPositionTop = petPositionTop + Math.floor(foodPositionTop/petPositionTop);
+					document.querySelector("#pet").style.top = petPositionTop + "px";
+				}
+				if (petPositionLeft > foodPositionLeft) {
+					petPositionLeft = petPositionLeft - Math.floor(petPositionLeft/foodPositionLeft);
+					document.querySelector("#pet").style.left = petPositionLeft + "px";
+				}
+				if (petPositionTop > foodPositionTop) {
+					petPositionTop = petPositionTop - Math.floor(petPositionTop/foodPositionTop);
+					document.querySelector("#pet").style.top = petPositionTop + "px";
+				}
+			}
+
+		}
+
+		document.getElementById("window").onclick = generateCoordinates;
+
+
+
+		window.setInterval(function(){
+			if (document.querySelector(".food")) {
+				thinkAboutEating();
+			}
+		  
+		}, 100);
+		
+
+
+
+
+	</script>
+
+</body>
+</html>
