@@ -68,13 +68,14 @@
 			var x = event.clientX;
     		var y = event.clientY;
     		dropFood(x, y);
+    		clearInterval(thinkNow);
     		thinkNow = window.setInterval(ifFoodExists, 24);
 		}
 
 		function ifFoodExists() {
 			if (document.querySelector(".food")) {
 				bored = 0;
-				thinkAboutEating();	
+				thinkAboutEating();
 
 			}
 			else {
@@ -101,7 +102,7 @@
 				document.querySelector(".food").remove();
 				window.performance.memory
 				speak("yum!");
-				clearInterval(thinkNow);
+				
 			    
 			}
 			else {
