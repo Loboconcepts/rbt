@@ -89,8 +89,20 @@
 			newFood.style.left = xCor + "px";
 			newFood.style.top = yCor + "px";
 			var currentDiv = document.getElementById("anchor");
-  			document.getElementById("window").insertBefore(newFood, currentDiv);
+  		document.getElementById("window").insertBefore(newFood, currentDiv);
+  		whichFoodIsCloser();
 		}
+		
+		function whichFoodIsCloser() {
+		  console.log(document.querySelectorAll(".food").item(document.querySelectorAll(".food").length - 1));
+		  var i = 0;
+		  // while (i < document.querySelectorAll(".food").length) {
+		  //   if ()
+		    
+		  //   i++;
+		  // }
+		}
+		
 		function thinkAboutEating() {
 			var foodPositionLeft = parseInt((document.querySelector(".food").style.left).replace("px",""),10);
 			var foodPositionTop = parseInt((document.querySelector(".food").style.top).replace("px",""),10);
@@ -100,10 +112,7 @@
 			var distanceToFoodTop = foodPositionTop - petPositionTop;
 			if ((distanceToFoodLeft <= 30 && distanceToFoodLeft > -6) && (distanceToFoodTop <= 30 && distanceToFoodTop > -6))  {
 				document.querySelector(".food").remove();
-				window.performance.memory
 				speak("yum!");
-				
-			    
 			}
 			else {
 				if (petPositionLeft < foodPositionLeft) {
