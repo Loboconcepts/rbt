@@ -7,10 +7,11 @@
 		.food {
 			width: 10px;
 			height: 10px;
-			background-color: #000000;
+			background-color: #773333;
 			position: absolute;
 			z-index: 100;
 			border-radius:30%;
+			box-shadow: 0px 1px 1px #000000;
 		}
 		#pet {
 			width:30px;
@@ -19,6 +20,7 @@
 			background-color: #FF00FF;
 			position: absolute;
 			z-index: 1000;
+			box-shadow: 0px 2px 2px #444444;
 		}
 		.speak::after {
 			position: absolute;
@@ -30,14 +32,26 @@
 			border-radius:10px;
 			padding:3px;
 			font-size:11px;
+			box-shadow: 0px 2px 2px #444444;
 		}
+
+		#window {
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b4ddb4+0,83c783+17,52b152+33,008a00+67,005700+83,002400+100;Green+3D+%231 */
+			background: #b4ddb4; /* Old browsers */
+			background: -moz-linear-gradient(top, #b4ddb4 0%, #83c783 17%, #52b152 33%, #008a00 67%, #005700 83%, #002400 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top, #b4ddb4 0%,#83c783 17%,#52b152 33%,#008a00 67%,#005700 83%,#002400 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom, #b4ddb4 0%,#83c783 17%,#52b152 33%,#008a00 67%,#005700 83%,#002400 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4ddb4', endColorstr='#002400',GradientType=0 ); /* IE6-9 */
+			margin:10px;
+		}
+
 	</style>
 </head>
 <body onresize="resizeField()" style="margin: 0px;">
 
 	<div data-txt="hey!" id="pet" style="left: 20px;top: 20px;"></div>
 
-	<div id="window" style="background-color:#85c2ba;margin:10px;">
+	<div id="window">
 
 		<div id="anchor">
 		</div>
@@ -89,18 +103,25 @@
 			newFood.style.left = xCor + "px";
 			newFood.style.top = yCor + "px";
 			var currentDiv = document.getElementById("anchor");
-  		document.getElementById("window").insertBefore(newFood, currentDiv);
-  		whichFoodIsCloser();
+	  		document.getElementById("window").insertBefore(newFood, currentDiv);
+	  		whichFoodIsCloser();
 		}
 		
 		function whichFoodIsCloser() {
-		  console.log(document.querySelectorAll(".food").item(document.querySelectorAll(".food").length - 1));
-		  var i = 0;
-		  // while (i < document.querySelectorAll(".food").length) {
-		  //   if ()
-		    
-		  //   i++;
-		  // }
+			var topItemLeft = parseInt((document.querySelectorAll(".food").item(0).style.left).replace("px",""),10);
+			var newestItemLeft = parseInt((document.querySelectorAll(".food").item(document.querySelectorAll(".food").length - 1).style.left).replace("px",""),10);
+			var topItemTop = parseInt((document.querySelectorAll(".food").item(0).style.top).replace("px",""),10);
+			var newestItemTop = parseInt((document.querySelectorAll(".food").item(document.querySelectorAll(".food").length - 1).style.top).replace("px",""),10);
+			var petPositionLeft = parseInt((document.querySelector("#pet").style.left).replace("px",""),10);
+			var petPositionTop = parseInt((document.querySelector("#pet").style.top).replace("px",""),10);
+			if ((Math.abs(petPositionLeft - newestItemLeft)) + (Math.abs(petPositionTop - newestItemTop)) < (Math.abs(petPositionLeft - topItemLeft)) + (Math.abs(petPositionTop - topItemTop))) {
+				console.log("New food is closer!")
+				document.getElementById("window").insertBefore(document.querySelectorAll(".food").item(document.querySelectorAll(".food").length - 1), document.querySelectorAll(".food").item(0));
+			}
+			else {
+				console.log("New food is not closer!")
+			}
+			
 		}
 		
 		function thinkAboutEating() {
