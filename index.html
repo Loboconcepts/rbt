@@ -170,6 +170,15 @@
 			bored = 0
 		}
 
+		// directional
+		function mvRight() {
+			var petPositionLeft = parseInt((document.querySelector("#pet").style.left).replace("px",""),10);
+			if (petPositionLeft < window.innerWidth) {
+				console.log("move right");
+
+			}
+		}
+
 		document.getElementById("window").onclick = generateCoordinates;
 		document.getElementById("pet").onclick = petted;
 
