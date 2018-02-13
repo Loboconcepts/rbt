@@ -4,41 +4,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Robot</title>
 	<style type="text/css">
-		.food {
-			width: 10px;
-			height: 10px;
-			background-color: #773333;
-			position: absolute;
-			z-index: 100;
-			border-radius:30%;
-			box-shadow: 0px 1px 1px #777777;
-		}
-		#pet {
-			width:30px;
-			height: 30px;
-			border-radius:100%;
-			background-color: #FF00FF;
-			position: absolute;
-			z-index: 1000;
-			box-shadow: 0px 2px 2px #777777;
-		}
-		.speak::after {
-			position: absolute;
-			content: attr(data-txt);
-			left:35px;
-			opacity: 100;
-			font-family: Arial,Helvetica,'sans-serif';
-			background-color: #ffffff;
-			border-radius:10px;
-			padding:3px;
-			font-size:11px;
-			box-shadow: 0px 2px 2px #777777;
-		}
+	body {
+		background-color: #000000;
+	}
+	.food {
+		width: 10px;
+		height: 10px;
+		background-color: #773333;
+		position: absolute;
+		z-index: 100;
+		border-radius:30%;
+		box-shadow: 0px 1px 1px #777777;
+	}
+	#pet {
+		width:30px;
+		height: 30px;
+		border-radius:100%;
+		background-color: #FF00FF;
+		position: absolute;
+		z-index: 1000;
+		box-shadow: 0px 2px 2px #777777;
+	}
+	.speak::after {
+		position: absolute;
+		content: attr(data-txt);
+		left:35px;
+		opacity: 100;
+		font-family: Arial,Helvetica,'sans-serif';
+		background-color: #ffffff;
+		border-radius:10px;
+		padding:3px;
+		font-size:11px;
+		box-shadow: 0px 2px 2px #777777;
+	}
 
-		#window {
-			background-color: #ddffdd;
-			margin:10px;
-		}
+	#window {
+		background-color: #ddffdd;
+		margin:10px;
+	}
 
 	</style>
 </head>
@@ -86,9 +89,10 @@
 			if (document.querySelector(".food")) {
 				bored = 0;
 				thinkAboutEating();
+
 			}
 			else {
-				return
+				clearInterval(thinkNow);
 			}
 		}
 
@@ -155,12 +159,20 @@
 				}
 			}
 		}
+		var dir = Math.floor(Math.random()*4);
 
 		function amBored() {
-			bored = bored + 1
-			if (bored == 5) {
-				speak("RAWR");
-				bored = 3;
+			bored = bored + 10
+			if (bored == 20) {
+				var rand = Math.floor(Math.random()*2);
+				if(rand == 1) {
+					speak("RAWR");
+					whatDidIJustDo = "Rawr out of boredom"
+				}
+			}
+			if (bored == 40) {
+				dir = Math.floor(Math.random()*4);
+				thinkNow = window.setInterval(moveAroundRandomlyOutOfBoredom, 24);
 			}
 		}
 
@@ -170,22 +182,71 @@
 			bored = 0
 		}
 
+		function moveAroundRandomlyOutOfBoredom () {
+			var petPositionLeft = parseInt((document.querySelector("#pet").style.left).replace("px",""),10);
+			var petPositionTop = parseInt((document.querySelector("#pet").style.top).replace("px",""),10);
+			if (bored >= 11) {
+				if (dir == 0) {
+					if (petPositionTop > 30) {mvUp();}
+					else {dir = 2;}
+				}
+				if (dir == 1) {
+					if (petPositionLeft < window.innerWidth - 30) {mvRight();}
+					else {dir = 3;}
+				}
+				if (dir == 2) {
+					if (petPositionTop < window.innerHeight - 30) {mvDown();}
+					else {dir = 0;}
+					
+				}
+				if (dir == 3) {
+					if (petPositionLeft > 30) {mvLeft();}
+					else {dir = 1;}
+				}
+				bored = bored - 1;
+			}
+			else {
+				clearInterval(thinkNow);
+			}
+
+		}
+
 		// directional
+		function mvUp() {
+			var petPositionTop = parseInt((document.querySelector("#pet").style.top).replace("px",""),10);
+			if (petPositionTop > 30) {
+				petPositionTop = petPositionTop - 1;
+				document.querySelector("#pet").style.top = petPositionTop + "px";
+			}
+		}
 		function mvRight() {
 			var petPositionLeft = parseInt((document.querySelector("#pet").style.left).replace("px",""),10);
-			if (petPositionLeft < window.innerWidth) {
-				console.log("move right");
-
+			if (petPositionLeft < window.innerWidth - 30) {
+				petPositionLeft = petPositionLeft + 1;
+				document.querySelector("#pet").style.left = petPositionLeft + "px";
+			}
+		}
+		function mvDown() {
+			var petPositionTop = parseInt((document.querySelector("#pet").style.top).replace("px",""),10);
+			if (petPositionTop < window.innerHeight - 30) {
+				petPositionTop = petPositionTop + 1;
+				document.querySelector("#pet").style.top = petPositionTop + "px";
+			}
+		}
+		function mvLeft() {
+			var petPositionLeft = parseInt((document.querySelector("#pet").style.left).replace("px",""),10);
+			if (petPositionLeft > 30) {
+				petPositionLeft = petPositionLeft - 1;
+				document.querySelector("#pet").style.left = petPositionLeft + "px";
 			}
 		}
 
 		document.getElementById("window").onclick = generateCoordinates;
 		document.getElementById("pet").onclick = petted;
 
-				// Thinking twice a second
+		// Thinking twice a second
 		var thinkNow = window.setInterval(amBored, 5000);
 
-			// 42
 		
 	</script>
 
