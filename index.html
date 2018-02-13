@@ -142,19 +142,19 @@
 			}
 			else {
 				if (petPositionLeft < foodPositionLeft) {
-					petPositionLeft = petPositionLeft + Math.floor(foodPositionLeft/petPositionLeft);
+					petPositionLeft = petPositionLeft + 1;
 					document.querySelector("#pet").style.left = petPositionLeft + "px";
 				}
 				if (petPositionTop < foodPositionTop) {
-					petPositionTop = petPositionTop + Math.floor(foodPositionTop/petPositionTop);
+					petPositionTop = petPositionTop + 1;
 					document.querySelector("#pet").style.top = petPositionTop + "px";
 				}
 				if (petPositionLeft > foodPositionLeft) {
-					petPositionLeft = petPositionLeft - Math.floor(petPositionLeft/foodPositionLeft);
+					petPositionLeft = petPositionLeft - 1;
 					document.querySelector("#pet").style.left = petPositionLeft + "px";
 				}
 				if (petPositionTop > foodPositionTop) {
-					petPositionTop = petPositionTop - Math.floor(petPositionTop/foodPositionTop);
+					petPositionTop = petPositionTop - 1;
 					document.querySelector("#pet").style.top = petPositionTop + "px";
 				}
 			}
