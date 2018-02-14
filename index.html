@@ -39,7 +39,12 @@
 	}
 
 	#window {
-		background-color: #ddffdd;
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f9fe+0,d6f0fd+100;White+3D+%232 */
+		background: #f2f9fe; /* Old browsers */
+		background: -moz-linear-gradient(top, #f2f9fe 0%, #d6f0fd 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top, #f2f9fe 0%,#d6f0fd 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom, #f2f9fe 0%,#d6f0fd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f9fe', endColorstr='#d6f0fd',GradientType=0 ); /* IE6-9 */
 		margin:10px;
 	}
 
@@ -106,7 +111,6 @@
 				var currentDiv = document.getElementById("anchor");
 		  		document.getElementById("window").insertBefore(newFood, currentDiv);
 		  		whichFoodIsCloser();
-
 			}
 		}
 		
@@ -168,7 +172,7 @@
 				var rand = Math.floor(Math.random()*2);
 				if(rand == 1) {
 					speak("RAWR");
-					whatDidIJustDo = "Rawr out of boredom"
+					whatDidIJustDo = "Rawr out of boredom";
 				}
 			}
 			if (bored == 40) {
@@ -197,8 +201,7 @@
 				}
 				if (dir == 2) {
 					if (petPositionTop < window.innerHeight - 30) {mvDown();}
-					else {dir = 0;}
-					
+					else {dir = 0;}			
 				}
 				if (dir == 3) {
 					if (petPositionLeft > 30) {mvLeft();}
@@ -209,7 +212,6 @@
 			else {
 				clearInterval(thinkNow);
 			}
-
 		}
 
 		// directional
