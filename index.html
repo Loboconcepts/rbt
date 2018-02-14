@@ -71,8 +71,9 @@
 
 		// talk function
 		function speak(sayWhat) {
-			document.getElementById("pet").dataset.txt = sayWhat;
+			document.querySelector("#pet").dataset.txt = sayWhat;
 			document.querySelector('#pet').classList.add("speak");
+			if (document.querySelector("#pet").style.left)
 			function removeWord() {document.querySelector('#pet').classList.remove("speak");}
 			setTimeout(removeWord, ((sayWhat.length * 100) + 600));
 		}
@@ -249,7 +250,7 @@
 		}
 
 		document.getElementById("window").onclick = generateCoordinates;
-		document.getElementById("pet").onclick = petted;
+		document.querySelector("#pet").onclick = petted;
 
 		// Thinking twice a second
 		var thinkNow = window.setInterval(generalState, 5000);
