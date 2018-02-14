@@ -73,6 +73,7 @@
 		function speak(sayWhat) {
 			document.getElementById("pet").dataset.txt = sayWhat;
 			document.querySelector('#pet').classList.add("speak");
+			if () {}
 			function removeWord() {document.querySelector('#pet').classList.remove("speak");}
 			setTimeout(removeWord, ((sayWhat.length * 100) + 600));
 		}
@@ -94,11 +95,10 @@
 			if (document.querySelector(".food")) {
 				bored = 0;
 				thinkAboutEating();
-
 			}
 			else {
 				clearInterval(thinkNow);
-				thinkNow = window.setInterval(amBored, 5000);
+				thinkNow = window.setInterval(generalState, 5000);
 			}
 		}
 
@@ -166,23 +166,24 @@
 		}
 		var dir = Math.floor(Math.random()*4);
 
-		function amBored() {
+		function generalState() {
 			bored = bored + 10
 			if (bored == 20) {
 				var rand = Math.floor(Math.random()*2);
 				if(rand == 1) {
 					speak("RAWR");
-					whatDidIJustDo = "Rawr out of boredom";
+					whatDidIJustDo = "Rawr";
 				}
 			}
-			if (bored == 40) {
+			if (bored >= 40) {
 				dir = Math.floor(Math.random()*4);
 				thinkNow = window.setInterval(moveAroundRandomlyOutOfBoredom, 24);
 			}
+			console.log("The last thing I did was: " + whatDidIJustDo);
 		}
 
 		function petted() {
-			speak("prrrrrrr");
+			speak("prrrrrrr");	
 			happiness = happiness + 1;
 			bored = 0
 		}
@@ -220,6 +221,7 @@
 			if (petPositionTop > 30) {
 				petPositionTop = petPositionTop - 1;
 				document.querySelector("#pet").style.top = petPositionTop + "px";
+				whatDidIJustDo = "Move up";
 			}
 		}
 		function mvRight() {
@@ -227,6 +229,7 @@
 			if (petPositionLeft < window.innerWidth - 30) {
 				petPositionLeft = petPositionLeft + 1;
 				document.querySelector("#pet").style.left = petPositionLeft + "px";
+				whatDidIJustDo = "Move right";
 			}
 		}
 		function mvDown() {
@@ -234,6 +237,7 @@
 			if (petPositionTop < window.innerHeight - 30) {
 				petPositionTop = petPositionTop + 1;
 				document.querySelector("#pet").style.top = petPositionTop + "px";
+				whatDidIJustDo = "Move down";
 			}
 		}
 		function mvLeft() {
@@ -241,6 +245,7 @@
 			if (petPositionLeft > 30) {
 				petPositionLeft = petPositionLeft - 1;
 				document.querySelector("#pet").style.left = petPositionLeft + "px";
+				whatDidIJustDo = "Move left";
 			}
 		}
 
@@ -248,7 +253,7 @@
 		document.getElementById("pet").onclick = petted;
 
 		// Thinking twice a second
-		var thinkNow = window.setInterval(amBored, 5000);
+		var thinkNow = window.setInterval(generalState, 5000);
 
 		
 	</script>
