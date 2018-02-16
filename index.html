@@ -24,6 +24,10 @@
 		position: absolute;
 		z-index: 1000;
 		box-shadow: 0px 2px 2px #777777;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+	}
+	#window {
+	  -webkit-tap-highlight-color: rgba(0,0,0,0);
 	}
 	.speak::after {
 		position: absolute;
@@ -129,8 +133,8 @@
 				}
 				else {
 					i ++
-				}		
-			}		
+				}
+			}
 		}
 		
 		function thinkAboutEating() {
@@ -184,7 +188,7 @@
 		}
 
 		function petted() {
-			speak("prrrrrrr");	
+			speak("prrrrrrr");
 			happiness = happiness + 1;
 			bored = 0
 		}
@@ -203,7 +207,7 @@
 				}
 				if (dir == 2) {
 					if (petPositionTop < window.innerHeight - 30) {mvDown();}
-					else {dir = 0;}			
+					else {dir = 0;}
 				}
 				if (dir == 3) {
 					if (petPositionLeft > 30) {mvLeft();}
