@@ -17,10 +17,7 @@
 		box-shadow: 0px 1px 1px #777777;
 	}
 	#pet {
-		width:30px;
-		height: 30px;
 		border-radius:100%;
-		background-color: #FF00FF;
 		position: absolute;
 		z-index: 1000;
 		box-shadow: 0px 2px 2px #777777;
@@ -56,7 +53,7 @@
 </head>
 <body onresize="resizeField()" style="margin: 0px;">
 
-	<div data-txt="hey!" id="pet" style="left: 20px;top: 20px;"></div>
+	<div data-txt="hey!" id="pet" style="left: 20px;top: 20px; width: 30px; height: 30px;background-color: #000000;"></div>
 
 	<div id="window">
 
@@ -70,8 +67,10 @@
 		var bored = 0;
 		var happiness = 0;
 		var whatDidIJustDo = "Nothing";
+		var color = "#111111";
 		document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
 		document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
+		document.querySelector("#pet").style.backgroundColor = color;
 
 		// talk function
 		function speak(sayWhat) {
@@ -144,9 +143,11 @@
 			var petPositionTop = parseInt((document.querySelector("#pet").style.top).replace("px",""),10);
 			var distanceToFoodLeft = foodPositionLeft - petPositionLeft;
 			var distanceToFoodTop = foodPositionTop - petPositionTop;
-			if ((distanceToFoodLeft <= 30 && distanceToFoodLeft > -6) && (distanceToFoodTop <= 30 && distanceToFoodTop > -6))  {
+			if ((distanceToFoodLeft <= parseInt((document.querySelector("#pet").style.width).replace("px",""),10) && distanceToFoodLeft > -6) && (distanceToFoodTop <= parseInt((document.querySelector("#pet").style.height).replace("px",""),10) && distanceToFoodTop > -6))  {
 				document.querySelector(".food").remove();
 				speak("yum!");
+				// grow(1);
+				changeColor(100);
 				whatDidIJustDo = "Eat";
 			}
 			else {
@@ -169,6 +170,20 @@
 			}
 		}
 		var dir = Math.floor(Math.random()*4);
+		
+		function grow(howMuch) {
+		  var petWidth = parseInt((document.querySelector("#pet").style.width).replace("px",""),10);
+		  var petHeight = parseInt((document.querySelector("#pet").style.height).replace("px",""),10);
+		  document.querySelector("#pet").style.width = (petWidth + howMuch) + "px";
+		  document.querySelector("#pet").style.height = (petHeight + howMuch) + "px";
+		}
+		
+		function changeColor(howMuch) {
+		  console.log(color);
+		  color = "#" + ((parseInt((color).replace("#",""),16) + howMuch).toString(16));
+		  document.querySelector("#pet").style.backgroundColor = color;
+		  console.log(color);
+		}
 
 		function generalState() {
 			bored = bored + 10
@@ -239,7 +254,7 @@
 		}
 		function mvDown() {
 			var petPositionTop = parseInt((document.querySelector("#pet").style.top).replace("px",""),10);
-			if (petPositionTop < window.innerHeight - 30) {
+			if (petPositionTop < window.innerHeight - 40) {
 				petPositionTop = petPositionTop + 1;
 				document.querySelector("#pet").style.top = petPositionTop + "px";
 				whatDidIJustDo = "Move down";
