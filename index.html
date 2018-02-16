@@ -26,7 +26,7 @@
 	#window {
 	  -webkit-tap-highlight-color: transparent;
 	}
-	.speak::after {
+	.speak-right::after {
 		position: absolute;
 		content: attr(data-txt);
 		left:35px;
@@ -37,6 +37,19 @@
 		padding:3px;
 		font-size:11px;
 		box-shadow: 0px 2px 2px #777777;
+	}
+	.speak-left::before {
+		position: absolute;
+		content: attr(data-txt);
+		left:-35px;
+		opacity: 100;
+		font-family: Arial,Helvetica,'sans-serif';
+		background-color: #ffffff;
+		border-radius:10px;
+		padding:3px;
+		font-size:11px;
+		box-shadow: 0px 2px 2px #777777;
+		text-align: right;
 	}
 
 	#window {
@@ -67,7 +80,7 @@
 		var bored = 0;
 		var happiness = 0;
 		var whatDidIJustDo = "Nothing";
-		var color = "#111111";
+		var color = "#ff00ff";
 		document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
 		document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
 		document.querySelector("#pet").style.backgroundColor = color;
@@ -75,10 +88,17 @@
 		// talk function
 		function speak(sayWhat) {
 			document.querySelector("#pet").dataset.txt = sayWhat;
-			document.querySelector('#pet').classList.add("speak");
-			if (document.querySelector("#pet").style.left)
-			function removeWord() {document.querySelector('#pet').classList.remove("speak");}
-			setTimeout(removeWord, ((sayWhat.length * 100) + 600));
+			var petPositionLeft = parseInt((document.querySelector("#pet").style.left).replace("px",""),10);
+			if (petPositionLeft >= window.innerWidth - 90) {
+				document.querySelector("#pet").classList.add("speak-left");
+				function removeWord() {document.querySelector('#pet').classList.remove("speak-left");}
+				setTimeout(removeWord, ((sayWhat.length * 100) + 600));
+			}
+			else {
+				document.querySelector("#pet").classList.add("speak-right");
+				function removeWord() {document.querySelector('#pet').classList.remove("speak-right");}
+				setTimeout(removeWord, ((sayWhat.length * 100) + 600));
+			}
 		}
 
 		// resize the field
@@ -87,10 +107,10 @@
 			document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
 		}
 		function generateCoordinates(ev) {
+			clearInterval(thinkNow);
 			var x = event.clientX;
     		var y = event.clientY;
     		dropFood(x, y);
-    		clearInterval(thinkNow);
     		thinkNow = window.setInterval(ifFoodExists, 24);
 		}
 
@@ -103,6 +123,7 @@
 				clearInterval(thinkNow);
 				thinkNow = window.setInterval(generalState, 5000);
 			}
+
 		}
 
 		function dropFood(xCor, yCor) {
@@ -131,7 +152,7 @@
 					break;
 				}
 				else {
-					i ++
+					i++;
 				}
 			}
 		}
@@ -147,8 +168,9 @@
 				document.querySelector(".food").remove();
 				speak("yum!");
 				// grow(1);
-				changeColor(100);
+				// changeColor(200000);
 				whatDidIJustDo = "Eat";
+				ifFoodExists();
 			}
 			else {
 				if (petPositionLeft < foodPositionLeft) {
@@ -179,10 +201,8 @@
 		}
 		
 		function changeColor(howMuch) {
-		  console.log(color);
 		  color = "#" + ((parseInt((color).replace("#",""),16) + howMuch).toString(16));
 		  document.querySelector("#pet").style.backgroundColor = color;
-		  console.log(color);
 		}
 
 		function generalState() {
@@ -196,10 +216,10 @@
 			}
 			if (bored >= 40) {
 				dir = Math.floor(Math.random()*4);
+				clearInterval(thinkNow);
 				thinkNow = window.setInterval(moveAroundRandomlyOutOfBoredom, 24);
 			}
 			console.log("The last thing I did was: " + whatDidIJustDo);
-			clearInterval(thinkNow);
 		}
 
 		function petted() {
@@ -232,6 +252,7 @@
 			}
 			else {
 				clearInterval(thinkNow);
+				thinkNow = window.setInterval(generalState, 5000);
 			}
 		}
 
@@ -241,7 +262,7 @@
 			if (petPositionTop > 30) {
 				petPositionTop = petPositionTop - 1;
 				document.querySelector("#pet").style.top = petPositionTop + "px";
-				whatDidIJustDo = "Move up";
+				whatDidIJustDo = "Move Up";
 			}
 		}
 		function mvRight() {
@@ -249,7 +270,7 @@
 			if (petPositionLeft < window.innerWidth - 30) {
 				petPositionLeft = petPositionLeft + 1;
 				document.querySelector("#pet").style.left = petPositionLeft + "px";
-				whatDidIJustDo = "Move right";
+				whatDidIJustDo = "Move Right";
 			}
 		}
 		function mvDown() {
@@ -257,7 +278,7 @@
 			if (petPositionTop < window.innerHeight - 40) {
 				petPositionTop = petPositionTop + 1;
 				document.querySelector("#pet").style.top = petPositionTop + "px";
-				whatDidIJustDo = "Move down";
+				whatDidIJustDo = "Move Down";
 			}
 		}
 		function mvLeft() {
@@ -265,7 +286,7 @@
 			if (petPositionLeft > 30) {
 				petPositionLeft = petPositionLeft - 1;
 				document.querySelector("#pet").style.left = petPositionLeft + "px";
-				whatDidIJustDo = "Move left";
+				whatDidIJustDo = "Move Left";
 			}
 		}
 
