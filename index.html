@@ -23,9 +23,6 @@
 		box-shadow: 0px 2px 2px #777777;
 		-webkit-tap-highlight-color: transparent;
 	}
-	#window {
-	  -webkit-tap-highlight-color: transparent;
-	}
 	.speak-right::after {
 		position: absolute;
 		content: attr(data-txt);
@@ -60,6 +57,7 @@
 		background: linear-gradient(to bottom, #f2f9fe 0%,#d6f0fd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f9fe', endColorstr='#d6f0fd',GradientType=0 ); /* IE6-9 */
 		margin:10px;
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	</style>
@@ -73,6 +71,7 @@
 		<div id="anchor">
 		</div>
 	</div>
+	<div><input onkeyup="this.value = this.value.replace(/[^A-Za-z]/g, '')" type="text" id="speech-box" style="margin-left:10px;"><button onclick="clickButtonToTalk()" id="speech-button">Say</button></div>
 
 
 
@@ -81,8 +80,9 @@
 		var happiness = 0;
 		var whatDidIJustDo = "Nothing";
 		var color = "#ff00ff";
+		var command;
 		document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
-		document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
+		document.getElementById("window").style.height = (window.innerHeight - 50) + "px";
 		document.querySelector("#pet").style.backgroundColor = color;
 
 		// talk function
@@ -104,7 +104,7 @@
 		// resize the field
 		function resizeField() {
 			document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
-			document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
+			document.getElementById("window").style.height = (window.innerHeight - 50) + "px";
 		}
 		function generateCoordinates(ev) {
 			clearInterval(thinkNow);
@@ -123,7 +123,6 @@
 				clearInterval(thinkNow);
 				thinkNow = window.setInterval(generalState, 5000);
 			}
-
 		}
 
 		function dropFood(xCor, yCor) {
@@ -241,7 +240,7 @@
 					else {dir = 3;}
 				}
 				if (dir == 2) {
-					if (petPositionTop < window.innerHeight - 30) {mvDown();}
+					if (petPositionTop < window.innerHeight - 70) {mvDown();}
 					else {dir = 0;}
 				}
 				if (dir == 3) {
@@ -275,7 +274,7 @@
 		}
 		function mvDown() {
 			var petPositionTop = parseInt((document.querySelector("#pet").style.top).replace("px",""),10);
-			if (petPositionTop < window.innerHeight - 40) {
+			if (petPositionTop < window.innerHeight - 70) {
 				petPositionTop = petPositionTop + 1;
 				document.querySelector("#pet").style.top = petPositionTop + "px";
 				whatDidIJustDo = "Move Down";
@@ -289,6 +288,23 @@
 				whatDidIJustDo = "Move Left";
 			}
 		}
+
+		// conversation
+		clickButtonToTalk = function() {
+			command = document.querySelector("#speech-box").value;
+			document.querySelector("#speech-box").value = "";
+			console.log(command);
+			speak("?");
+
+		}
+
+		document.querySelector("#speech-box").addEventListener("keyup", function(ev) {
+	      ev.preventDefault();
+	      if (ev.keyCode === 13) {
+	        document.querySelector("#speech-button").click();
+	      }
+	    });
+
 
 		document.getElementById("window").onclick = generateCoordinates;
 		document.querySelector("#pet").onclick = petted;
