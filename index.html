@@ -303,7 +303,10 @@
 					speak(">_<");
 					happiness = happiness - 1;
 					break;
-				case /hi|hello|hey|howdy|sup|yo/.test(command):
+				case /how are you/.test(command):
+					speak("^_^");
+					break;
+				case /hi|hello|howdy|sup|yo/.test(command):
 					speak("^_^");
 					break;
 				default:
