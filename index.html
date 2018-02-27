@@ -83,8 +83,10 @@
 	<script type="text/javascript">
 		var bored = 0;
 		var happiness = 0;
+		var blueColor = 125 + happiness;
+		var redColor = 125 - happiness;
 		var whatDidIJustDo = "Nothing";
-		var color = "#ff00ff";
+		var color = "rgb(" + redColor + ", 0, " + blueColor + ")";
 		var command;
 		// 0=greeting, 1=curse
 		var learnArray = [0,0];
@@ -119,6 +121,7 @@
 			var x = event.clientX;
     		var y = event.clientY;
     		dropFood(x, y);
+    		bored = 0;
     		thinkNow = window.setInterval(ifFoodExists, 24);
 		}
 
@@ -177,6 +180,7 @@
 				// grow(1);
 				// changeColor(200000);
 				whatDidIJustDo = "Eat";
+				happyAdjust(1);
 				ifFoodExists();
 			}
 			else {
@@ -222,6 +226,10 @@
 				}
 			}
 			if (bored >= 40) {
+				var rand = Math.floor(Math.random()*4);
+				if(rand == 1) {
+					happyAdjust(-1)
+				}
 				dir = Math.floor(Math.random()*4);
 				clearInterval(thinkNow);
 				thinkNow = window.setInterval(moveAroundRandomlyOutOfBoredom, 24);
@@ -231,7 +239,7 @@
 
 		function petted() {
 			speak("◠‿◠");
-			happiness = happiness + 1;
+			happyAdjust(1);
 			bored = 0
 		}
 
@@ -305,7 +313,7 @@
 			switch (true) {
 				case / fuck | shit | bitch | cunt | ass | asshole | damnit | dammit /.test(command):
 					speak(">_<");
-					happiness = happiness - 1;
+					happyAdjust(-1);
 					break;
 				case / sup | how are you | whats up /.test(command):
 					if (happiness > 0) {
@@ -318,7 +326,7 @@
 						speak(">_<");
 					}
 					break;
-				case / hi | hello | howdy | yo /.test(command):
+				case / hi | hello | howdy | yo | hey /.test(command):
 					learnArray[0] = learnArray[0] + 1;
 					if (learnArray[0] == 4) {
 						knownArray[0] = command;
@@ -335,8 +343,15 @@
 				default:
 					speak("?");
 			}
-
 		}
+
+		function happyAdjust(val) {
+			happiness = happiness + val;
+			blueColor = 125 + happiness;
+			redColor = 125 - happiness;
+			color = "rgb(" + redColor + ", 0, " + blueColor + ")";
+			document.querySelector("#pet").style.backgroundColor = color;
+		} 
 
 		document.querySelector("#speech-box").addEventListener("keyup", function(ev) {
 	      ev.preventDefault();
