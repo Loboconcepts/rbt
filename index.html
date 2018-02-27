@@ -86,6 +86,9 @@
 		var whatDidIJustDo = "Nothing";
 		var color = "#ff00ff";
 		var command;
+		// 0=greeting, 1=curse
+		var learnArray = [0,0];
+		var knownArray = ["",""];
 		document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
 		document.getElementById("window").style.height = (window.innerHeight - 50) + "px";
 		document.querySelector("#pet").style.backgroundColor = color;
@@ -97,12 +100,12 @@
 			if (petPositionLeft >= window.innerWidth - 90) {
 				document.querySelector("#pet").classList.add("speak-left");
 				function removeWord() {document.querySelector('#pet').classList.remove("speak-left");}
-				setTimeout(removeWord, ((sayWhat.length * 100) + 600));
+				setTimeout(removeWord, ((sayWhat.length * 100) + 800));
 			}
 			else {
 				document.querySelector("#pet").classList.add("speak-right");
 				function removeWord() {document.querySelector('#pet').classList.remove("speak-right");}
-				setTimeout(removeWord, ((sayWhat.length * 100) + 600));
+				setTimeout(removeWord, ((sayWhat.length * 100) + 800));
 			}
 		}
 
@@ -227,7 +230,7 @@
 		}
 
 		function petted() {
-			speak("prrrrrrr");
+			speak("◠‿◠");
 			happiness = happiness + 1;
 			bored = 0
 		}
@@ -296,18 +299,38 @@
 
 		// conversation
 		clickButtonToTalk = function() {
-			command = document.querySelector("#speech-box").value.toLowerCase();
+			bored = 0;
+			command = " " + document.querySelector("#speech-box").value.toLowerCase() + " ";
 			document.querySelector("#speech-box").value = "";
 			switch (true) {
-				case /fuck|shit|bitch|cunt|ass/.test(command):
+				case / fuck | shit | bitch | cunt | ass | asshole | damnit | dammit /.test(command):
 					speak(">_<");
 					happiness = happiness - 1;
 					break;
-				case /how are you/.test(command):
-					speak("^_^");
+				case / how are you /.test(command):
+					if (happiness > 0) {
+						speak("•◡•");
+					}
+					if (happiness == 0) {
+						speak("•_•");
+					}
+					if (happiness < 0) {
+						speak(">_<");
+					}
 					break;
-				case /hi|hello|howdy|sup|yo/.test(command):
-					speak("^_^");
+				case / hi | hello | howdy | sup | yo /.test(command):
+					learnArray[0] = learnArray[0] + 1;
+					if (learnArray[0] == 4) {
+						knownArray[0] = command;
+						speak(knownArray[0]);
+					}
+					else if (knownArray[0] != "") {
+						speak(knownArray[0]);
+					}
+					else {
+						speak("!");
+						console.log(learnArray[0]);
+					}
 					break;
 				default:
 					speak("?");
