@@ -307,7 +307,7 @@
 					speak(">_<");
 					happiness = happiness - 1;
 					break;
-				case / how are you /.test(command):
+				case / sup | how are you | whats up |/.test(command):
 					if (happiness > 0) {
 						speak("•◡•");
 					}
@@ -318,7 +318,7 @@
 						speak(">_<");
 					}
 					break;
-				case / hi | hello | howdy | sup | yo /.test(command):
+				case / hi | hello | howdy | yo /.test(command):
 					learnArray[0] = learnArray[0] + 1;
 					if (learnArray[0] == 4) {
 						knownArray[0] = command;
