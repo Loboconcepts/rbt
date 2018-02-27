@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=2, user-scalable=0">
 	<title>Robot</title>
 	<style type="text/css">
 	body {
@@ -71,7 +71,7 @@
 		<div id="anchor">
 		</div>
 	</div>
-	<div><input onkeyup="this.value = this.value.replace(/[^A-Za-z]/g, '')" type="text" id="speech-box" style="margin-left:10px;"><button onclick="clickButtonToTalk()" id="speech-button">Say</button></div>
+	<div><input maxlength="20" onkeyup="this.value = this.value.replace(/[^A-Za-z ?!]/g, '')" type="text" id="speech-box" style="margin-left:10px;"><button onclick="clickButtonToTalk()" id="speech-button">Say</button></div>
 
 
 
@@ -291,10 +291,19 @@
 
 		// conversation
 		clickButtonToTalk = function() {
-			command = document.querySelector("#speech-box").value;
+			command = document.querySelector("#speech-box").value.toLowerCase();
 			document.querySelector("#speech-box").value = "";
-			console.log(command);
-			speak("?");
+			switch (true) {
+				case /fuck|shit|bitch|cunt|ass/.test(command):
+					speak(">_<");
+					happiness = happiness - 1;
+					break;
+				case /hi|hello|howdy|sup|yo/.test(command):
+					speak("^_^");
+					break;
+				default:
+					speak("?");
+			}
 
 		}
 
