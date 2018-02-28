@@ -6,7 +6,7 @@
 		newGame();
 		addStylesheet();
 		//resizeField();
-		window.addEventListener("resize", resizeField);
+		//window.addEventListener("resize", resizeField);
 		function newGame() {
 			console.log("create window script ran!");
 			var createPet = document.createElement("div");
