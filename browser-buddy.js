@@ -5,8 +5,8 @@
 		console.log("loaded!");
 		newGame();
 		addStylesheet();
-		//resizeField();
-		//window.addEventListener("resize", resizeField);
+		window.addEventListener("resize", resizeField);
+		window.addEventListener("scroll", resizeField);
 		function newGame() {
 			console.log("create window script ran!");
 			var createPet = document.createElement("div");
@@ -19,9 +19,11 @@
 			createPet.style.backgroundColor = "#000000";
 			document.body.insertBefore(createPet, document.body.firstElementChild);
 			}
+			// resize the field
 			function resizeField() {
 				document.body.style.width = (window.innerWidth) + "px";
 				document.body.style.height = (window.innerHeight) + "px";
+				console.log("resizing!");
 			}
 			function addStylesheet() {
 				var stylesheet = document.createElement('link');
@@ -59,11 +61,11 @@
 			}
 		}
 
-		// resize the field
+
 		function generateCoordinates(ev) {
 			clearInterval(thinkNow);
-			var x = event.clientX;
-    		var y = event.clientY;
+			var x = event.pageX;
+    		var y = event.pageY;
     		dropFood(x, y);
     		bored = 0;
     		thinkNow = window.setInterval(ifFoodExists, 24);
