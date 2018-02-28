@@ -13,7 +13,7 @@
 			createPet.style.width = "30px";
 			createPet.style.height = "30px";
 			createPet.style.backgroundColor = "#000000";
-			document.body.insertBefore(createPet, document.body);
+			document.body.insertBefore(createPet, document.body.firstElementChild);
 			}
 			function resizeField() {
 				document.body.style.width = (window.innerWidth - 20) + "px";
