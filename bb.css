@@ -10,14 +10,14 @@ html, body {
 		height: 10px;
 		background-color: #773333;
 		position: absolute;
-		z-index: 100;
+		z-index: 2147483640;
 		border-radius:30%;
 		box-shadow: 0px 1px 1px #777777;
 	}
 	#pet {
 		border-radius:100%;
 		position: absolute;
-		z-index: 1000;
+		z-index: 2147483647;
 		box-shadow: 0px 2px 2px #777777;
 		-webkit-tap-highlight-color: transparent;
 	}
