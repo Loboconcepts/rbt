@@ -1,10 +1,14 @@
 (function() {
+	if (document.querySelector("#pet")) {
+		return;
+	}
 		console.log("loaded!");
 		newGame();
 		addStylesheet();
 		resizeField();
+		window.addEventListener("resize", resizeField);
 		function newGame() {
-			console.log("create window script ran!")
+			console.log("create window script ran!");
 			var createPet = document.createElement("div");
 			createPet.id = "pet";
 			createPet.dataTxt = "hey";
@@ -178,9 +182,10 @@
 		}
 
 		function petted() {
-			speak("◠‿◠");
+			speak("^_^");
 			happyAdjust(1);
-			bored = 0
+			bored = 0;
+			setTimeout(function(){ somethingElseWasClicked = false; }, 1000);
 		}
 
 		function moveAroundRandomlyOutOfBoredom () {
@@ -301,8 +306,28 @@
 		}, false);
 
 
-		document.body.onclick = generateCoordinates;
-		document.querySelector("#pet").onclick = petted;
+		// Click handling
+		var somethingElseWasClicked = false;
+
+		document.querySelector("#pet").onclick = function() {
+			somethingElseWasClicked = true;
+			petted();
+		}
+
+		document.getElementByTagName("input").onclick = function() {
+			somethingElseWasClicked = true;
+			console.log(somethingElseWasClicked);
+			setTimeout(function(){ somethingElseWasClicked = false; }, 1000);
+			
+		}
+
+		document.body.onclick = function() {
+			if (!somethingElseWasClicked) {
+				generateCoordinates();
+			}
+		}
+
+
 
 		// Thinking twice a second
 		var thinkNow = window.setInterval(generalState, 5000);
