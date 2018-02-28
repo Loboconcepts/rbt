@@ -184,6 +184,7 @@
 		}
 
 		function petted() {
+			somethingElseWasClicked = true;
 			speak("^_^");
 			happyAdjust(1);
 			bored = 0;
@@ -310,11 +311,14 @@
 
 		// Click handling
 		document.body.addEventListener('mouseup', makeSureNothingImportantWasClicked, true); 
-		
-		// var somethingElseWasClicked = false;
 
-		// document.querySelector("#pet").onclick = function() {
+		document.querySelector("#pet").addEventListener('mousedown', petted, true); 
+		
+		var somethingElseWasClicked = false;
+
+		// document.querySelector("#pet").mousesdown = function() {
 		// 	somethingElseWasClicked = true;
+		// 	console.log(somethingElseWasClicked);
 		// 	petted();
 		// }
 
@@ -336,7 +340,7 @@
 		// }
 
 		function makeSureNothingImportantWasClicked() {
-			if (document.activeElement == document.body) {
+			if (document.activeElement == document.body && !somethingElseWasClicked) {
 				generateCoordinates();
 			}
 		}
