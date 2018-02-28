@@ -13,12 +13,7 @@
 			createPet.style.width = "30px";
 			createPet.style.height = "30px";
 			createPet.style.backgroundColor = "#000000";
-			document.body.insertBefore(createPet, document.body.firstElementChild);
-
-
-
-
-
+			document.body.insertBefore(createPet, document.body);
 			}
 			function resizeField() {
 				document.body.style.width = (window.innerWidth - 20) + "px";
@@ -31,6 +26,7 @@
 		        stylesheet.href = "https://loboconcepts.github.io/rbt/bb.css";
 				document.getElementsByTagName("head")[0].appendChild(stylesheet);
 			}
+			// START
 			var bored = 0;
 			var happiness = 0;
 			var blueColor = 125 + happiness;
