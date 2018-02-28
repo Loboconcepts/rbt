@@ -1,19 +1,49 @@
-console.log("loaded!")
-    var bored = 0;
-		var happiness = 0;
-		var blueColor = 125 + happiness;
-		var redColor = 125 - happiness;
-		var whatDidIJustDo = "Nothing";
-		var color = "rgb(" + redColor + ", 0, " + blueColor + ")";
-		var command;
-		// 0=greeting, 1=curse
-		var learnArray = [0,0];
-		var knownArray = ["",""];
-		document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
-		document.getElementById("window").style.height = (window.innerHeight - 50) + "px";
-		document.querySelector("#pet").style.backgroundColor = color;
+(function() {
+		console.log("loaded!");
+		newGame();
+		addStylesheet();
+		resizeField();
+		function newGame() {
+			console.log("create window script ran!")
+			var createPet = document.createElement("div");
+			createPet.id = "pet";
+			createPet.dataTxt = "hey";
+			createPet.style.left = "20px";
+			createPet.style.top = "20px";
+			createPet.style.width = "30px";
+			createPet.style.height = "30px";
+			createPet.style.backgroundColor = "#000000";
+			document.body.insertBefore(createPet, document.body.firstElementChild);
 
-		// talk function
+
+
+
+
+			}
+			function resizeField() {
+				document.body.style.width = (window.innerWidth - 20) + "px";
+				document.body.style.height = (window.innerHeight - 50) + "px";
+			}
+			function addStylesheet() {
+				var stylesheet = document.createElement('link');
+		        stylesheet.type = "text/css";
+		        stylesheet.rel = "stylesheet";
+		        stylesheet.href = "bb.css";
+				document.getElementsByTagName("head")[0].appendChild(stylesheet);
+			}
+			var bored = 0;
+			var happiness = 0;
+			var blueColor = 125 + happiness;
+			var redColor = 125 - happiness;
+			var whatDidIJustDo = "Nothing";
+			var color = "rgb(" + redColor + ", 0, " + blueColor + ")";
+			var command;
+			// 0=greeting, 1=curse
+			var learnArray = [0,0];
+			var knownArray = ["",""];
+			document.querySelector("#pet").style.backgroundColor = color;
+
+			// talk function
 		function speak(sayWhat) {
 			document.querySelector("#pet").dataset.txt = sayWhat;
 			var petPositionLeft = parseInt((document.querySelector("#pet").style.left).replace("px",""),10);
@@ -30,10 +60,6 @@ console.log("loaded!")
 		}
 
 		// resize the field
-		function resizeField() {
-			document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
-			document.getElementById("window").style.height = (window.innerHeight - 50) + "px";
-		}
 		function generateCoordinates(ev) {
 			clearInterval(thinkNow);
 			var x = event.clientX;
@@ -60,8 +86,8 @@ console.log("loaded!")
 				newFood.setAttribute("class","food");
 				newFood.style.left = xCor + "px";
 				newFood.style.top = yCor + "px";
-				var currentDiv = document.getElementById("anchor");
-		  		document.getElementById("window").insertBefore(newFood, currentDiv);
+				var currentDiv = document.getElementById("pet");
+		  		document.body.insertBefore(newFood, currentDiv);
 		  		whichFoodIsCloser();
 			}
 		}
@@ -76,7 +102,7 @@ console.log("loaded!")
 				var petPositionLeft = parseInt((document.querySelector("#pet").style.left).replace("px",""),10);
 				var petPositionTop = parseInt((document.querySelector("#pet").style.top).replace("px",""),10);
 				if ((Math.abs(petPositionLeft - newestItemLeft)) + (Math.abs(petPositionTop - newestItemTop)) < (Math.abs(petPositionLeft - topItemLeft)) + (Math.abs(petPositionTop - topItemTop))) {
-					document.getElementById("window").insertBefore(document.querySelectorAll(".food").item(document.querySelectorAll(".food").length - 1), document.querySelectorAll(".food").item(i));
+					document.body.insertBefore(document.querySelectorAll(".food").item(document.querySelectorAll(".food").length - 1), document.querySelectorAll(".food").item(i));
 					break;
 				}
 				else {
@@ -271,12 +297,6 @@ console.log("loaded!")
 			document.querySelector("#pet").style.backgroundColor = color;
 		} 
 
-		document.querySelector("#speech-box").addEventListener("keyup", function(ev) {
-	      ev.preventDefault();
-	      if (ev.keyCode === 13) {
-	        document.querySelector("#speech-button").click();
-	      }
-	    });
 
 	    // Prevent scrolling
 	    document.body.addEventListener("touchmove", function(event) {
@@ -285,8 +305,10 @@ console.log("loaded!")
 		}, false);
 
 
-		document.getElementById("window").onclick = generateCoordinates;
+		document.body.onclick = generateCoordinates;
 		document.querySelector("#pet").onclick = petted;
 
 		// Thinking twice a second
 		var thinkNow = window.setInterval(generalState, 5000);
+	
+})();
