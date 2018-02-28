@@ -5,7 +5,7 @@
 		console.log("loaded!");
 		newGame();
 		addStylesheet();
-		resizeField();
+		//resizeField();
 		window.addEventListener("resize", resizeField);
 		function newGame() {
 			console.log("create window script ran!");
