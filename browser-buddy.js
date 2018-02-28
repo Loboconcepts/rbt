@@ -27,7 +27,7 @@
 				var stylesheet = document.createElement('link');
 		        stylesheet.type = "text/css";
 		        stylesheet.rel = "stylesheet";
-		        stylesheet.href = "https://loboconcepts.github.io/rbt/bb.css";
+		        stylesheet.href = "https://loboconcepts.github.io/rbt/bb.css?v2";
 				document.getElementsByTagName("head")[0].appendChild(stylesheet);
 			}
 			// START
