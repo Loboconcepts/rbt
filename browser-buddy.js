@@ -314,13 +314,7 @@
 			petted();
 		}
 
-		document.getElementByTagName("input").onclick = function() {
-			somethingElseWasClicked = true;
-			console.log(somethingElseWasClicked);
-			setTimeout(function(){ somethingElseWasClicked = false; }, 1000);
-			
-		}
-
+		
 		document.body.onclick = function() {
 			if (!somethingElseWasClicked) {
 				generateCoordinates();
