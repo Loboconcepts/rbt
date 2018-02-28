@@ -88,6 +88,7 @@
 				newFood.setAttribute("class","food");
 				newFood.style.left = xCor + "px";
 				newFood.style.top = yCor + "px";
+				newFood.addEventListener("mousedown", destroy);
 				var currentDiv = document.getElementById("pet");
 		  		document.body.insertBefore(newFood, currentDiv);
 		  		whichFoodIsCloser();
@@ -299,7 +300,13 @@
 			redColor = 125 - happiness;
 			color = "rgb(" + redColor + ", 0, " + blueColor + ")";
 			document.querySelector("#pet").style.backgroundColor = color;
-		} 
+		}
+
+		function destroy() {
+			somethingElseWasClicked = true;
+			this.remove();
+			setTimeout(function(){ somethingElseWasClicked = false; }, 1000);
+		}
 
 
 	    // Prevent scrolling
@@ -312,7 +319,11 @@
 		// Click handling
 		document.body.addEventListener('mouseup', makeSureNothingImportantWasClicked, true); 
 
-		document.querySelector("#pet").addEventListener('mousedown', petted, true); 
+		document.querySelector("#pet").addEventListener('mousedown', petted, true);
+
+		
+
+		
 		
 		var somethingElseWasClicked = false;
 
