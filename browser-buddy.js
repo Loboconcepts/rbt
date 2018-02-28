@@ -20,8 +20,8 @@
 			document.body.insertBefore(createPet, document.body.firstElementChild);
 			}
 			function resizeField() {
-				document.body.style.width = (window.innerWidth - 20) + "px";
-				document.body.style.height = (window.innerHeight - 50) + "px";
+				document.body.style.width = (window.innerWidth) + "px";
+				document.body.style.height = (window.innerHeight) + "px";
 			}
 			function addStylesheet() {
 				var stylesheet = document.createElement('link');
@@ -307,16 +307,34 @@
 
 
 		// Click handling
-		var somethingElseWasClicked = false;
+		document.body.addEventListener('mouseup', makeSureNothingImportantWasClicked, true); 
+		
+		// var somethingElseWasClicked = false;
 
-		document.querySelector("#pet").onclick = function() {
-			somethingElseWasClicked = true;
-			petted();
-		}
+		// document.querySelector("#pet").onclick = function() {
+		// 	somethingElseWasClicked = true;
+		// 	petted();
+		// }
+
+		// document.querySelector("input").onclick = function() {
+		// 	somethingElseWasClicked = true;
+		// 	console.log(somethingElseWasClicked);
+		// }
+
+		// document.querySelector("a").onclick = function() {
+		// 	somethingElseWasClicked = true;
+		// 	console.log(somethingElseWasClicked);
+		// }
 
 		
-		document.body.onclick = function() {
-			if (!somethingElseWasClicked) {
+		// document.body.onclick = function() {
+		// 	if (!somethingElseWasClicked) {
+		// 		generateCoordinates();
+		// 	}
+		// }
+
+		function makeSureNothingImportantWasClicked() {
+			if (document.activeElement == document.body) {
 				generateCoordinates();
 			}
 		}
