@@ -309,13 +309,6 @@
 		}
 
 
-	    // Prevent scrolling
-	    document.body.addEventListener("touchmove", function(event) {
-		    event.preventDefault();
-		    event.stopPropagation();
-		}, false);
-
-
 		// Click handling
 		document.body.addEventListener('mouseup', makeSureNothingImportantWasClicked, true); 
 
