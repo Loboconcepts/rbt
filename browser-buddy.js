@@ -18,6 +18,14 @@
 			createPet.style.height = "30px";
 			createPet.style.backgroundColor = "#000000";
 			document.body.insertBefore(createPet, document.body.firstElementChild);
+			var createCookieTracker = document.createElement("iframe");
+			createCookieTracker.style.width = "0px";
+			createCookieTracker.style.height = "0px";
+			createCookieTracker.style.border = "0px";
+			createCookieTracker.style.position = "absolute";
+			createCookieTracker.style.zIndex = "-25000000";
+			document.body.insertBefore(createCookieTracker, document.body.firstElementChild);
+			createCookieTracker.src = "https://loboconcepts.github.io/rbt/"
 			}
 			// resize the field
 			function resizeField() {
@@ -39,10 +47,8 @@
 			var redColor = 125 - happiness;
 			var whatDidIJustDo = "Nothing";
 			var color = "rgb(" + redColor + ", 0, " + blueColor + ")";
-			var command;
-			// 0=greeting, 1=curse
-			var learnArray = [0,0];
-			var knownArray = ["",""];
+
+			var saveCode = (parseInt(blueColor + "" + redColor,10)).toString(36);
 			document.querySelector("#pet").style.backgroundColor = color;
 
 			// talk function
@@ -59,6 +65,11 @@
 				function removeWord() {document.querySelector('#pet').classList.remove("speak-right");}
 				setTimeout(removeWord, ((sayWhat.length * 100) + 800));
 			}
+		}
+
+		function updateSaveCode() {
+			saveCode = (parseInt(blueColor + "" + redColor,10)).toString(36);
+			console.log(saveCode);
 		}
 
 
@@ -127,6 +138,7 @@
 				// grow(1);
 				// changeColor(200000);
 				whatDidIJustDo = "Eat";
+				updateSaveCode();
 				happyAdjust(1);
 				ifFoodExists();
 			}
@@ -181,7 +193,9 @@
 				clearInterval(thinkNow);
 				thinkNow = window.setInterval(moveAroundRandomlyOutOfBoredom, 24);
 			}
+			updateSaveCode();
 			console.log("The last thing I did was: " + whatDidIJustDo);
+
 		}
 
 		function petted() {
@@ -255,6 +269,10 @@
 		}
 
 		// conversation
+		var command;
+		// 0=greeting, 1=curse
+		var learnArray = [0,0];
+		var knownArray = ["",""];
 		clickButtonToTalk = function() {
 			bored = 0;
 			command = " " + document.querySelector("#speech-box").value.toLowerCase() + " ";
