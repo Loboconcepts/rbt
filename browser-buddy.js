@@ -61,6 +61,7 @@
 
 		function updateSaveCode() {
 			saveCode = happiness;
+		}
 
 			// talk function
 		function speak(sayWhat) {
