@@ -3,6 +3,7 @@
 		return;
 	}
 	if (document.cookie.search("browserBuddy") != -1) {
+		console.log("cookie exists!")
 		loadCode();
 	}
 		console.log("loaded!");
@@ -56,6 +57,7 @@
 
 		function loadCode() {
 			var loadCode = parseInt(document.cookie.replace("browserBuddy=",""),10);
+			console.log(parseInt(document.cookie.replace("browserBuddy=",""),10));
 			happiness = loadCode;
 		}
 
