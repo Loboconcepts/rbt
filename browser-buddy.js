@@ -2,6 +2,9 @@
 	if (document.querySelector("#pet")) {
 		return;
 	}
+	if (document.cookie.search("browserBuddy") != -1) {
+		loadCode();
+	}
 		console.log("loaded!");
 		newGame();
 		addStylesheet();
@@ -47,9 +50,17 @@
 			var redColor = 125 - happiness;
 			var whatDidIJustDo = "Nothing";
 			var color = "rgb(" + redColor + ", 0, " + blueColor + ")";
+			var saveCode = happiness;
 
-			var saveCode = (parseInt(blueColor + "" + redColor,10)).toString(36);
-			document.querySelector("#pet").style.backgroundColor = color;
+
+
+		function loadCode() {
+			var loadCode = parseInt(document.cookie.replace("browserBuddy=",""),10);
+			happiness = loadCode;
+		}
+
+		function updateSaveCode() {
+			saveCode = happiness;
 
 			// talk function
 		function speak(sayWhat) {
@@ -65,11 +76,6 @@
 				function removeWord() {document.querySelector('#pet').classList.remove("speak-right");}
 				setTimeout(removeWord, ((sayWhat.length * 100) + 800));
 			}
-		}
-
-		function updateSaveCode() {
-			saveCode = (parseInt(blueColor + "" + redColor,10)).toString(36);
-			console.log(saveCode);
 		}
 
 
