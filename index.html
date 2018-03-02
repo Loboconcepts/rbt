@@ -48,13 +48,17 @@ This creates a cookie. If you have cookies enabled, you will have to save and lo
 		}
 
 	function newBuddy() {
-		 var myCookie = getCookie("browserBuddy");
+		var myCookie = getCookie("browserBuddy");
 
 	    if (myCookie == null) {
 	        setCookie("browserBuddy",0,365);
 			console.log("new Cookie!")
 	    }
 	}
+
+	var frame = document.getElementById('your-frame-id'); 
+
+	frame.contentWindow.postMessage(document.cookie, '*'); 
 
 		
 
