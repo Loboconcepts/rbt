@@ -18,7 +18,8 @@
 
 	createCookieTrackerIFrame();
 	if (document.cookie.search("browserBuddy") == -1) {
-		alert("Go to robot.com to hatch a buddy!");
+		prompt("Buddy hatched!");
+		setCookie("browserBuddy", 0, 365);
 	}
 	// START
 	var bored = 0;
