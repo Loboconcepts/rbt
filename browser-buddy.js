@@ -59,6 +59,8 @@
 			var loadCode = getCookie("browserBuddy");
 			console.log(getCookie("browserBuddy"));
 			happiness = loadCode;
+			blueColor = 125 + happiness;
+			redColor = 125 - happiness;
 			color = "rgb(" + redColor + ", 0, " + blueColor + ")";
 		}
 
