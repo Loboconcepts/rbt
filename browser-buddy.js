@@ -16,20 +16,6 @@
 
 	var bbiframe = document.getElementById('browser-buddy-i');
 
-    window.addEventListener('message', function (e) {
-         if (e.source === bbiframe.contentWindow && e.origin === 'https://loboconcepts.github.io/rbt/') {
-             var cookie = e.data;
-            //do something with cookie
-         }
-
-     }); 
-    //wait for the bbiframe to load...maybe ping it first...then
-    bbiframe.contentWindow.postMessage('give me the cookie:cookie name', 'https://loboconcepts.github.io/rbt/');
-
-	
-
-
-
 	createCookieTrackerIFrame();
 	if (document.cookie.search("browserBuddy") == -1) {
 		alert("Go to robot.com to hatch a buddy!");
