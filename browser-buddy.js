@@ -12,10 +12,7 @@
 			var saveCode = happiness;
 
 
-	if (document.cookie.search("browserBuddy") != -1) {
-		console.log("cookie exists!")
-		loadCode();
-	}
+	
 		newGame();
 		addStylesheet();
 		window.addEventListener("resize", resizeField);
@@ -52,6 +49,11 @@
 		        stylesheet.rel = "stylesheet";
 		        stylesheet.href = "https://loboconcepts.github.io/rbt/bb.css";
 				document.getElementsByTagName("head")[0].appendChild(stylesheet);
+			}
+
+			if (document.cookie.search("browserBuddy") != -1) {
+				console.log("cookie exists!")
+				loadCode();
 			}
 			
 
