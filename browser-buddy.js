@@ -63,6 +63,8 @@
 
 		function updateSaveCode() {
 			saveCode = happiness;
+			console.log("updating!")
+			setCookie("browserBuddy",saveCode,365);
 		}
 
 			// talk function
