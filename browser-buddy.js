@@ -56,10 +56,16 @@
 
 
 		function loadCode() {
-			var loadCode = parseInt(document.cookie.replace("browserBuddy=",""),10);
-			console.log(parseInt(document.cookie.replace("browserBuddy=",""),10));
+			var loadCode = getCookie(browserBuddy);
+			console.log(getCookie(browserBuddy));
 			happiness = loadCode;
 			color = "rgb(" + redColor + ", 0, " + blueColor + ")";
+		}
+
+		function getCookie(name) {
+		  	var value = "; " + document.cookie;
+		  	var parts = value.split("; " + name + "=");
+		  	if (parts.length == 2) return parts.pop().split(";").shift();
 		}
 
 		function updateSaveCode() {
