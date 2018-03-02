@@ -56,10 +56,14 @@ This creates a cookie. If you have cookies enabled, you will have to save and lo
 	    }
 	}
 
-
-	var frame = document.getElementById('browser-buddy-i'); 
-
-	frame.contentWindow.postMessage(document.cookie, '*'); 
+	 window.addEventListener('message', function (e) {
+        if (e.origin === 'google.com') {
+             var soughtCookie = /give me the cookie\:(.*)/.exec(e.data)[1];
+             // read the cookie
+             var cookie = getCookieFn(soughtCookie)
+             e.source.postMessage(cookie.toString(), 'google.com');
+        }
+    }, false);
 
 		
 
