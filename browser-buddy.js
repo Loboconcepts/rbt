@@ -57,6 +57,7 @@
 			console.log(parseInt(getCookie("browserBuddy"),10));
 			blueColor = 125 + happiness;
 			redColor = 125 - happiness;
+			console.log(happiness + "\n" + blueColor + "\n" + redColor + "\n" + color);
 			color = "rgb(" + redColor + ", 0, " + blueColor + ")";
 		}
 
