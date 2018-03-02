@@ -63,7 +63,7 @@
 	}
 
 	if (document.cookie.search("browserBuddy") != -1) {
-		console.log("cookie exists!")
+		console.log("cookie exists!");
 		loadCode();
 	}
 
@@ -86,7 +86,7 @@
 
 	function updateSaveCode() {
 		saveCode = happiness;
-		console.log("updating!")
+		console.log("updating!");
 		setCookie("browserBuddy", saveCode, 365);
 	}
 
