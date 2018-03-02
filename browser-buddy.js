@@ -62,6 +62,7 @@
 			redColor = 125 - happiness;
 			console.log(happiness + "\n" + blueColor + "\n" + redColor + "\n" + color);
 			color = "rgb(" + redColor + ", 0, " + blueColor + ")";
+			document.querySelector("#pet").style.backgroundColor = color;
 		}
 
 		function getCookie(name) {
