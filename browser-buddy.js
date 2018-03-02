@@ -2,8 +2,20 @@
 	if (document.querySelector("#pet")) {
 		return;
 	}
+	function createCookieTrackerIFrame() {
+		var createCookieTracker = document.createElement("iframe");
+		createCookieTracker.style.width = "0px";
+		createCookieTracker.style.height = "0px";
+		createCookieTracker.style.border = "0px";
+		createCookieTracker.style.position = "absolute";
+		createCookieTracker.style.zIndex = "-25000000";
+		document.body.insertBefore(createCookieTracker, document.body.firstElementChild);
+		createCookieTracker.src = "https://loboconcepts.github.io/rbt/";
+	}
+	createCookieTrackerIFrame();
 	if (document.cookie.search("browserBuddy") == -1) {
-		alert("Go to robot.com to hatch a buddy!")
+		alert("Go to robot.com to hatch a buddy!");
+		return;
 	}
 	// START
 	var bored = 0;
@@ -13,6 +25,8 @@
 	var whatDidIJustDo = "Nothing";
 	var color = "rgb(" + redColor + ", 0, " + blueColor + ")";
 	var saveCode = happiness;
+
+	
 
 
 	newGame();
@@ -31,14 +45,6 @@
 		createPet.style.height = "30px";
 		createPet.style.backgroundColor = "#000000";
 		document.body.insertBefore(createPet, document.body.firstElementChild);
-		var createCookieTracker = document.createElement("iframe");
-		createCookieTracker.style.width = "0px";
-		createCookieTracker.style.height = "0px";
-		createCookieTracker.style.border = "0px";
-		createCookieTracker.style.position = "absolute";
-		createCookieTracker.style.zIndex = "-25000000";
-		document.body.insertBefore(createCookieTracker, document.body.firstElementChild);
-		createCookieTracker.src = "https://loboconcepts.github.io/rbt/"
 	}
 	// resize the field
 	function resizeField() {
