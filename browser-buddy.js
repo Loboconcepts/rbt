@@ -12,10 +12,29 @@
 		document.body.insertBefore(createCookieTracker, document.body.firstElementChild);
 		createCookieTracker.src = "https://loboconcepts.github.io/rbt/";
 	}
+
+	window.addEventListener('message', function(event) { 
+
+	    // IMPORTANT: Check the origin of the data! 
+	    if (~event.origin.indexOf('https://loboconcepts.github.io/rbt/')) { 
+	        // The data has been sent from your site 
+
+	        // The data sent with postMessage is stored in event.data 
+	        console.log(event.data); 
+	    } else { 
+	        // The data hasn't been sent from your site! 
+	        // Be careful! Do not use it. 
+	        return; 
+	    } 
+	}); 
+
+	
+
+
+
 	createCookieTrackerIFrame();
 	if (document.cookie.search("browserBuddy") == -1) {
 		alert("Go to robot.com to hatch a buddy!");
-		return;
 	}
 	// START
 	var bored = 0;
@@ -25,9 +44,6 @@
 	var whatDidIJustDo = "Nothing";
 	var color = "rgb(" + redColor + ", 0, " + blueColor + ")";
 	var saveCode = happiness;
-
-	
-
 
 	newGame();
 	addStylesheet();
