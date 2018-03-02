@@ -245,6 +245,7 @@
 		speak("^_^");
 		happyAdjust(1);
 		bored = 0;
+		updateSaveCode();
 		setTimeout(function () {
 			somethingElseWasClicked = false;
 		}, 1000);
