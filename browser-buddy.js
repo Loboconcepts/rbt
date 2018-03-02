@@ -14,20 +14,17 @@
 		createCookieTracker.src = "https://loboconcepts.github.io/rbt/";
 	}
 
-	window.addEventListener('message', function(event) { 
+	var bbiframe = document.getElementById('browser-buddy-i');
 
-	    // IMPORTANT: Check the origin of the data! 
-	    if (~event.origin.indexOf('https://loboconcepts.github.io/rbt/')) { 
-	        // The data has been sent from your site 
+    window.addEventListener('message', function (e) {
+         if (e.source === bbiframe.contentWindow && e.origin === 'https://loboconcepts.github.io/rbt/') {
+             var cookie = e.data;
+            //do something with cookie
+         }
 
-	        // The data sent with postMessage is stored in event.data 
-	        console.log(event.data); 
-	    } else { 
-	        // The data hasn't been sent from your site! 
-	        // Be careful! Do not use it. 
-	        return; 
-	    } 
-	}); 
+     }); 
+    //wait for the bbiframe to load...maybe ping it first...then
+    bbiframe.contentWindow.postMessage('give me the cookie:cookie name', 'https://loboconcepts.github.io/rbt/');
 
 	
 
