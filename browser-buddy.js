@@ -18,7 +18,7 @@
 
 	createCookieTrackerIFrame();
 	if (document.cookie.search("browserBuddy") == -1) {
-		prompt("Buddy hatched!");
+		alert("Buddy hatched!");
 		setCookie("browserBuddy", 0, 365);
 	}
 	// START
