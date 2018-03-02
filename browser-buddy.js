@@ -6,7 +6,6 @@
 		console.log("cookie exists!")
 		loadCode();
 	}
-		console.log("loaded!");
 		newGame();
 		addStylesheet();
 		window.addEventListener("resize", resizeField);
@@ -55,6 +54,7 @@
 
 		function loadCode() {
 			happiness = parseInt(getCookie("browserBuddy"),10);
+			console.log(parseInt(getCookie("browserBuddy"),10));
 			blueColor = 125 + happiness;
 			redColor = 125 - happiness;
 			color = "rgb(" + redColor + ", 0, " + blueColor + ")";
