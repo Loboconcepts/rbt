@@ -59,6 +59,7 @@
 			var loadCode = parseInt(document.cookie.replace("browserBuddy=",""),10);
 			console.log(parseInt(document.cookie.replace("browserBuddy=",""),10));
 			happiness = loadCode;
+			color = "rgb(" + redColor + ", 0, " + blueColor + ")";
 		}
 
 		function updateSaveCode() {
