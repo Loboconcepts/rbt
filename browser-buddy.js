@@ -2,6 +2,16 @@
 	if (document.querySelector("#pet")) {
 		return;
 	}
+	// START
+			var bored = 0;
+			var happiness = 0;
+			var blueColor = 125 + happiness;
+			var redColor = 125 - happiness;
+			var whatDidIJustDo = "Nothing";
+			var color = "rgb(" + redColor + ", 0, " + blueColor + ")";
+			var saveCode = happiness;
+
+
 	if (document.cookie.search("browserBuddy") != -1) {
 		console.log("cookie exists!")
 		loadCode();
@@ -43,14 +53,7 @@
 		        stylesheet.href = "https://loboconcepts.github.io/rbt/bb.css";
 				document.getElementsByTagName("head")[0].appendChild(stylesheet);
 			}
-			// START
-			var bored = 0;
-			var happiness = 0;
-			var blueColor = 125 + happiness;
-			var redColor = 125 - happiness;
-			var whatDidIJustDo = "Nothing";
-			var color = "rgb(" + redColor + ", 0, " + blueColor + ")";
-			var saveCode = happiness;
+			
 
 		function loadCode() {
 			happiness = parseInt(getCookie("browserBuddy"),10);
