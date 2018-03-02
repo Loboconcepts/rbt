@@ -9,7 +9,7 @@
 		createCookieTracker.style.border = "0px";
 		createCookieTracker.style.position = "absolute";
 		createCookieTracker.style.zIndex = "-25000000";
-		createCookieTracker..setAttribute("id", "browser-buddy-i");
+		createCookieTracker.setAttribute("id", "browser-buddy-i");
 		document.body.insertBefore(createCookieTracker, document.body.firstElementChild);
 		createCookieTracker.src = "https://loboconcepts.github.io/rbt/";
 	}
