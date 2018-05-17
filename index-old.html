@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+	<title>Robot</title>
+
+<style type="text/css">
+	#egg {
+	   display:block;
+	   width: 35px;
+	   height: 45px;
+	   background-color: #cccc99;
+	   -webkit-border-radius: 63px 63px 63px 63px / 108px 108px 72px 72px;
+	   border-radius:         50%  50%  50%  50%  / 60%   60%   40%  40%;
+	}
+</style>
+
+</head>
+<body>
+
+<h1 style="text-align: center;">Browser Buddy</h1>
+
+<div style="margin: 0 auto;" id="egg"></div>
+<br><br>
+<div style="text-align: center;"><button onclick="newBuddy()" id="newBuddy"><a href="javascript:var s = document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='https://loboconcepts.github.io/rbt/browser-buddy.js';document.body.appendChild(s);s.id='browser-buddy';void(0);">New Buddy</a></button>
+<br><br>
+<a href="javascript:var s = document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='https://loboconcepts.github.io/rbt/browser-buddy.js';document.body.appendChild(s);s.id='browser-buddy';void(0);">Browser Buddy Shortcut</a>
+
+<br>
+This creates a cookie. If you have cookies enabled, you will have to save and load manually
+<br>
+</div>
+
+
+<script type="text/javascript">
+	function setCookie(cname, cvalue, exdays) {
+	    var d = new Date();
+	    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	    var expires = "expires="+ d.toUTCString();
+	    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+	function eraseCookie(name) {   
+	    document.cookie = name+'=; Max-Age=-99999999;';  
+	}
+	function getCookie(name) {
+		  	var value = "; " + document.cookie;
+		  	var parts = value.split("; " + name + "=");
+		  	if (parts.length == 2) return parts.pop().split(";").shift();
+		}
+
+	function newBuddy() {
+		var myCookie = getCookie("browserBuddy");
+
+	    if (myCookie == null) {
+	        setCookie("browserBuddy",0,365);
+			console.log("new Cookie!")
+	    }
+	}
+
+		
+
+</script>
+
+</body>
+</html>

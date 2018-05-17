@@ -18,7 +18,6 @@
 
 	createCookieTrackerIFrame();
 	if (document.cookie.search("browserBuddy") == -1) {
-		alert("Buddy hatched!");
 		setCookie("browserBuddy", 0, 365);
 	}
 	// START
@@ -44,7 +43,7 @@
 		createPet.style.top = "20px";
 		createPet.style.width = "30px";
 		createPet.style.height = "30px";
-		createPet.style.backgroundColor = "#000000";
+		createPet.style.backgroundColor = color;
 		document.body.insertBefore(createPet, document.body.firstElementChild);
 	}
 	// resize the field
