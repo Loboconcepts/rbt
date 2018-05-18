@@ -1,3 +1,13 @@
+	#window {
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f9fe+0,d6f0fd+100;White+3D+%232 */
+		background: #f2f9fe; /* Old browsers */
+		background: -moz-linear-gradient(top, #f2f9fe 0%, #d6f0fd 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top, #f2f9fe 0%,#d6f0fd 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom, #f2f9fe 0%,#d6f0fd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f9fe', endColorstr='#d6f0fd',GradientType=0 ); /* IE6-9 */
+		margin:10px;
+		-webkit-tap-highlight-color: transparent;
+	}
 	.food {
 		width: 10px;
 		height: 10px;
@@ -8,13 +18,12 @@
 		box-shadow: 0px 1px 1px #777777;
 	}
 	#pet {
-		border-radius:100%;
 		position: absolute;
 		z-index: 2147483647;
 		box-shadow: 0px 2px 2px #777777;
 		-webkit-tap-highlight-color: transparent;
 	}
-	.speak-right::after {
+	.speak-right::before {
 		position: absolute;
 		content: attr(data-txt);
 		left:35px;
@@ -39,3 +48,4 @@
 		box-shadow: 0px 2px 2px #777777;
 		text-align: right;
 	}
+	

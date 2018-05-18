@@ -4,68 +4,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 	<title>Robot</title>
+	<link rel="stylesheet" href="style.css">
+	
 	<style type="text/css">
-	html, body {
-		overflow-x:hidden;
-		overflow-y:hidden;
-	}
-	body {
-		background-color: #000000;
-		position: relative;
-	}
-	.food {
-		width: 10px;
-		height: 10px;
-		background-color: #773333;
+	canvas::before {
 		position: absolute;
-		z-index: 100;
-		border-radius:30%;
-		box-shadow: 0px 1px 1px #777777;
-	}
-	#pet {
-		border-radius:100%;
-		position: absolute;
-		z-index: 1000;
-		box-shadow: 0px 2px 2px #777777;
-		-webkit-tap-highlight-color: transparent;
-	}
-	.speak-right::after {
-		position: absolute;
-		content: attr(data-txt);
-		left:35px;
+		content: 'attr(data-txt)';
+		left:55px;
+		color: #000000;
 		opacity: 100;
 		font-family: Arial,Helvetica,'sans-serif';
 		background-color: #ffffff;
 		border-radius:10px;
 		padding:3px;
-		font-size:11px;
+		font-size:31px;
 		box-shadow: 0px 2px 2px #777777;
 	}
-	.speak-left::before {
-		position: absolute;
-		content: attr(data-txt);
-		left:-35px;
-		opacity: 100;
-		font-family: Arial,Helvetica,'sans-serif';
-		background-color: #ffffff;
-		border-radius:10px;
-		padding:3px;
-		font-size:11px;
-		box-shadow: 0px 2px 2px #777777;
-		text-align: right;
-	}
-
-	#window {
-		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f9fe+0,d6f0fd+100;White+3D+%232 */
-		background: #f2f9fe; /* Old browsers */
-		background: -moz-linear-gradient(top, #f2f9fe 0%, #d6f0fd 100%); /* FF3.6-15 */
-		background: -webkit-linear-gradient(top, #f2f9fe 0%,#d6f0fd 100%); /* Chrome10-25,Safari5.1-6 */
-		background: linear-gradient(to bottom, #f2f9fe 0%,#d6f0fd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f9fe', endColorstr='#d6f0fd',GradientType=0 ); /* IE6-9 */
-		margin:10px;
-		-webkit-tap-highlight-color: transparent;
-	}
-
 	</style>
 </head>
 <body onresize="resizeField()" style="margin: 0px;">
@@ -80,24 +34,18 @@
 	<!-- <div><input maxlength="20" onkeyup="this.value = this.value.replace(/[^A-Za-z ?!]/g, '')" type="text" id="speech-box" style="margin-left:10px;"><button onclick="clickButtonToTalk()" id="speech-button">Say</button></div> -->
 
 
-<script type="text/javascript" src="browser-buddy.js"></script>
+<script type="text/javascript" src="js/behavior.js"></script>
+<script type="text/javascript" src="js/appearance.js"></script>
 
 <script type="text/javascript">
-
+	document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
+	document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
+	// resize the field
+	function resizeField() {
 		document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
 		document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
-		
-
-
-		// resize the field
-		function resizeField() {
-			document.getElementById("window").style.width = (window.innerWidth - 20) + "px";
-			document.getElementById("window").style.height = (window.innerHeight - 20) + "px";
-		}
-		
-
-		
-	</script>
+	}
+</script>
 
 
 	
